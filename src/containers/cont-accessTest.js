@@ -3,8 +3,6 @@ import {connect} from 'react-redux';
 
 class AccessTest extends Component {
   render() {
-    console.log(this.props.image2D);
-    console.log(this.props.imageLoading);
     if(this.props.imageLoading){
       return(<h2>Loading...</h2>);
     }

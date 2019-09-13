@@ -3,7 +3,7 @@ export default function(file, imageObject) {
     dispatch(imageUploadStarted());
     var reader = new FileReader();
     reader.onload = function () {
-      imageObject.src = reader.result;
+      imageObject.src = reader.result; //TODO: schrumpfen auf 300px breite bzw höhe
     }
     reader.onloadend = function () {
       var width = imageObject.naturalWidth;
