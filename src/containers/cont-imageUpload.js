@@ -22,12 +22,9 @@ class ImageUpload extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {nooo:null};
-}
 
 function matchDispatchToProps(dispatch) {
   return bindActionCreators({onImageUpload: onImageUpload}, dispatch);
 }
 
-export default connect(mapStateToProps, matchDispatchToProps)(ImageUpload);
+export default connect(null, matchDispatchToProps)(ImageUpload);
