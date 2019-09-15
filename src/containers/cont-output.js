@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import ReactDOM from 'react-dom';
+//import Polygon from '../util/polygon';
 
 class Output extends Component {
   polygonCanvas = React.createRef()
@@ -23,12 +24,17 @@ class Output extends Component {
   }
   drawOnCanvas() {
     var canvas = this.polygonCanvas.current;
-    canvas.height=500;
-    canvas.width=300;
+    canvas.height=400; // alle alten koordinaten durch 2
+    canvas.width=500;
     var ctx = canvas.getContext("2d");
-    ctx.moveTo(0, 0);
-    ctx.lineTo(200, 100);
-    ctx.stroke();
+    this.props.polygonList.forEach((polygon) => {
+      polygon.getLineSegments().forEach((line) => {
+          ctx.beginPath();
+          ctx.moveTo(line.start.x /2, line.start.y /2);
+          ctx.lineTo(line.end.x /2, line.end.y /2);
+          ctx.stroke();
+      });
+    });
   }
 
 

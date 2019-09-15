@@ -6,12 +6,13 @@ import Output from '../containers/cont-output';
 const App = () => {
     return (
         <div>
-          <Output />
           <h2>
             Upload Image
           </h2>
           <ImageUpload />
           <AccessTest />
+          <Output />
+        
         </div>
     );
 };
