@@ -1,5 +1,6 @@
-import Geometry from './geometry';
+import {getAreaSizeOfPolygon} from './geometry';
 import LineSegment from './lineSegment';
+import Vertex from './vertex';
 
 class Polygon {
   constructor(outline, text) {
@@ -10,7 +11,7 @@ class Polygon {
     this.outline.push(vertex);
   }
   getAreaSize() {
-    return Geometry.getAreaSizeOfPolygon(this);
+    return getAreaSizeOfPolygon(this);
   }
   getLineSegment(index) {
     var start = this.outline[index];
@@ -23,6 +24,29 @@ class Polygon {
       segments.push(this.getLineSegment(index));
     });
     return segments;
+  }
+  vertexInPolygon(v){
+    var verticalLine = new LineSegment(v, new Vertex(v.x, 0));
+    var intersectionCount = 0;
+    this.getLineSegments().forEach((edge) => {
+      if(edge.intersects(verticalLine)) intersectionCount++;
+    });
+    if(intersectionCount % 2 == 0) return false;
+    return true;
+  }
+  canSee(v,w) {
+    if(v.equals(w)) return true;
+    var visionLine = new LineSegment(v,w);
+    var intersect = new Vertex(-1,-1);
+    this.getLineSegments().forEach((edge) => {
+      if(visionLine.getLineIntersection(edge, intersect)) {
+        if(!intersect.equals(v) && !intersect.equals(w)) {
+          return false;
+        }
+      }
+    });
+    if(!this.vertexInPolygon(v)) return false;
+    return true;
   }
 }
 

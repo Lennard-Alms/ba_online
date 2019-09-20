@@ -1,3 +1,7 @@
+body{
+  font-family: 'Source Code Pro', monospace;
+  font-weight: 900;
+}
 h2 {
   color: #555555;
 }
@@ -15,4 +19,18 @@ h2 {
   padding-right: 10px;
 }
 .polygonNames{
+}
+#canvasPolygonDiv{
+  position:relative;
+  overflow: hidden;
+  span{
+    -webkit-transition: top 3s, left 3s;
+    transition: top 3s, left 3s;
+  }
+}
+#canvas{
+}
+.textChangeInput{
+  border: none;
+  width: 100%;
 }

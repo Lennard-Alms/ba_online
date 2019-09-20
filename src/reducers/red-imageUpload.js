@@ -15,7 +15,6 @@ export default function (state=initialState, action) {
         imageLoading: false,
         image2D: action.image2D
       };
-    break;
   }
   return state;
 }

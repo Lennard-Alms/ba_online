@@ -29,6 +29,9 @@ class LineSegment {
       }
       return false; // No collision
   }
+  toString() {
+    return 'ls:sx' + this.start.x + 'sy' + this.start.y + 'ex' + this.end.x + 'ey' + this.end.x;
+  }
 }
 
 export default LineSegment;

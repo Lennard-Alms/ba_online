@@ -16,7 +16,7 @@ class ImageUpload extends Component {
             </div>
           </DragAndDropArea>
         </div>
-        <img ref="inputImage" id="inputImage" src=""/>
+        <img ref="inputImage" id="inputImage" style={{maxHeight: '300px', maxWidth: '300px'}} src=""/>
       </div>
     );
   }

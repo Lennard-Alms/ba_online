@@ -6,11 +6,13 @@ export default function(file, imageObject) {
       imageObject.src = reader.result; //TODO: schrumpfen auf 300px breite bzw höhe
     }
     reader.onloadend = function () {
-      var width = imageObject.naturalWidth;
-      var height = imageObject.naturalHeight;
+      var width = imageObject.offsetTop;
+      var height = imageObject.offsetWidth;
+      console.log(imageObject);
 
       var canvas = document.createElement("canvas");
-
+      canvas.height=300;
+      canvas.width=300;
       var ctx = canvas.getContext("2d");
       ctx.drawImage(imageObject,0,0);
 
@@ -21,7 +23,7 @@ export default function(file, imageObject) {
 
       for(var row = 0; row < height; row ++) {
         var row1D = [];
-        for(var column = 0; column < width; column ++) {
+        for(var column = 0; column < width; column++) {
           var rIndex = row * width + column * 4;
           var gIndex = row * width + column * 4 + 1;
           var bIndex = row * width + column * 4 + 2;
@@ -47,6 +49,7 @@ const imageUploadStarted = () => {
 }
 
 const imageUploadSuccess = (image2D) => {
+  console.log(image2D);
   return {
     type: 'IMAGE_UPLOAD_SUCCESS',
     image2D: image2D

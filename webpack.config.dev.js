@@ -4,6 +4,9 @@ import path from 'path';
 import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
 
 export default {
+  node: {
+    fs: "empty" //<- prevent "fs not found"
+  },
   resolve: {
     extensions: ['*', '.js', '.jsx', '.json'],
     // To support react-hot-loader

@@ -7,6 +7,8 @@ require('./styles/style.scss');
 import App from './components/app';
 import thunk from 'redux-thunk';
 
+
+
 const store = createStore(allReducers, applyMiddleware(thunk));
 
 ReactDOM.render(<Provider store={store}>
