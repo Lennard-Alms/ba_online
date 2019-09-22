@@ -1,4 +1,4 @@
-import {drawText} from '../util/centerXStrat'
+import calcualteTextOptions from '../util/centerXStrat'
 
 export default function(polygonList){
   return (dispatch) => {
@@ -7,7 +7,7 @@ export default function(polygonList){
       var textOptionList = [];
       polygonList.forEach((polygon) => {
         try{
-          textOptionList.push(drawText(polygon));
+          textOptionList.push(calcualteTextOptions(polygon));
         } catch (error) {
           console.log(error);
           var textOptions = [];

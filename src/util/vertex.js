@@ -12,6 +12,9 @@ class Vertex {
   add(vertex) {
       return new Vertex(this.x + vertex.x, this.y + vertex.y);
   }
+  dist(vertex) {
+    return this.sub(vertex).mag();
+  }
   mult(scalar) {
       return new Vertex(this.x * scalar, this.y * scalar);
   }

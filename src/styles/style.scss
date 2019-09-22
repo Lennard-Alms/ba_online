@@ -21,6 +21,7 @@ h2 {
 .polygonNames{
 }
 #canvasPolygonDiv{
+  height: 300px;
   position:relative;
   overflow: hidden;
   span{
@@ -28,7 +29,10 @@ h2 {
     transition: top 3s, left 3s;
   }
 }
-#canvas{
+#backgroundPic{
+  max-width: 300px;
+  max-height: 300px;
+  opacity: 0.3;
 }
 .textChangeInput{
   border: none;

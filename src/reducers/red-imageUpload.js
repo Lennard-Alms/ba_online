@@ -1,6 +1,6 @@
 const initialState = {
   imageLoading: false,
-  image2D: [] // basisbild angeben
+  image: '' // basisbild angeben
 };
 
 export default function (state=initialState, action) {
@@ -8,13 +8,14 @@ export default function (state=initialState, action) {
     case 'IMAGE_UPLOAD_STARTED':
       return {
         imageLoading: true,
-        image2D: []
+        image: ''
       }
     case 'IMAGE_UPLOAD_SUCCESS':
       return {
         imageLoading: false,
-        image2D: action.image2D
-      };
+        image: action.link
+      }
+
   }
   return state;
 }

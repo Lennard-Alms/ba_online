@@ -44,7 +44,7 @@ class Output extends Component {
               top: topStr,
               display: this.props.textOptionList[indexOuter][indexInner].display,
               fontSize: size.toString() + 'px',
-              transform: 'scaleX(' + scaleX.toString() + ') scaleY(' + scaleY.toString() + ')',
+              transform: 'scaleX(' + scaleX.toString() + ') scaleY(' + scaleY.toString() + ') rotate(' + polygon.angle + 'rad)',
             }}
             >{letter}</span>
         );
@@ -80,7 +80,7 @@ class Output extends Component {
       <div>
         <button onClick={(event) => this.props.onCalculateTextOptions(this.props.polygonList)}>Rechne!</button>
         <div id='canvasPolygonDiv'>
-          <canvas id='canvas' ref={this.polygonCanvas}/>
+          <img id='backgroundPic' src={this.props.imageLink}/>
           {this.createNameList()}
         </div>
         <div>
@@ -90,7 +90,6 @@ class Output extends Component {
     );
   }
   componentDidMount(){
-    this.drawOnCanvas();
     this.props.onCalculateTextOptions(this.props.polygonList);
   }
 }
@@ -98,7 +97,8 @@ class Output extends Component {
 function mapStateToProps(state) {
   return {
     polygonList: state.polygonList,
-    textOptionList: state.textOptionList
+    textOptionList: state.textOptionList,
+    imageLink: state.imageUpload.image
   };
 }
 

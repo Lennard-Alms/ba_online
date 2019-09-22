@@ -1,10 +1,18 @@
 import LineSegment from './lineSegment';
 import Vertex from './vertex';
 import Graph from './graph';
-import {splitPolygon} from './geometry'
+import {splitPolygon, findFurthestPoints, turnPolygon, turnBack} from './geometry'
 import NormalDistribution from 'normal-distribution';
 
-export function drawText(polygon) {
+
+
+export default function calculalteTextOptions(polygon) {
+  return drawText(polygon);
+}
+
+
+
+const drawText = (polygon) => {
 
   var ereignisstruktur = polygon.outline.slice();
   ereignisstruktur.sort((v1,v2) => { return v1.x - v2.x; });
@@ -38,17 +46,21 @@ export function drawText(polygon) {
     cutListR.sort((v1,v2) => { return v1.y - v2.y; });
 
     if(cutListL.length % 2 != 0 || cutListR.length % 2 != 0) continue;
-
-    for(var jndex = 0; jndex < cutListL.length; jndex += 2) {
-      let upper = new LineSegment(cutListL[jndex], cutListR[jndex]);
-      let lower = new LineSegment(cutListL[jndex + 1], cutListR[jndex + 1]);
-      var y1 = (upper.start.y + lower.start.y) / 2;
-      var y2 = (upper.end.y + lower.end.y) / 2;
-      var bisector = new LineSegment(new Vertex(upper.start.x, y1), new Vertex(upper.end.x, y2));
-      var areaBisec = (Math.abs(upper.start.y - lower.start.y) + Math.abs(upper.end.y - lower.end.y)) / 4;
-      area[bisector] = Math.max(areaBisec, 0.01);
-      bisectorSegments.push(bisector);
+    try {
+      for(var jndex = 0; jndex < cutListL.length; jndex += 2) {
+        let upper = new LineSegment(cutListL[jndex], cutListR[jndex]);
+        let lower = new LineSegment(cutListL[jndex + 1], cutListR[jndex + 1]);
+        var y1 = (upper.start.y + lower.start.y) / 2;
+        var y2 = (upper.end.y + lower.end.y) / 2;
+        var bisector = new LineSegment(new Vertex(upper.start.x, y1), new Vertex(upper.end.x, y2));
+        var areaBisec = (Math.abs(upper.start.y - lower.start.y) + Math.abs(upper.end.y - lower.end.y)) / 4;
+        area[bisector] = Math.max(areaBisec, 0.01);
+        bisectorSegments.push(bisector);
+      }
+    } catch(err) {
+      continue;
     }
+
   }
 
   var alpha = 0.5;
@@ -324,10 +336,11 @@ export function drawText(polygon) {
       var scaleX =(1.8 * deltaX * tau) / size;
       var lx = z.x - (size * 0.3);
       var ly = z.y - (size / 1.5);
+      var positionVertext = new Vertex(lx,ly);
       var letterOptions = {
         display: 'inline',
-        x: lx,
-        y: ly,
+        x: positionVertext.x,
+        y: positionVertext.y,
         size: size,
         scaleX: scaleX,
         scaleY: scaleY,
@@ -338,7 +351,6 @@ export function drawText(polygon) {
     return textOptions;
   }
 }
-
 
 //import hyphenopoly from 'hyphenopoly';
 

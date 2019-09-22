@@ -1,4 +1,5 @@
 import Polygon from './polygon';
+import Vertex from './vertex';
 
 export function getAreaSizeOfPolygon(polygon) {
   var area = 0;
@@ -9,6 +10,24 @@ export function getAreaSizeOfPolygon(polygon) {
   return Math.abs(area);
 }
 
+export function turnPolygon(polygon) {
+  var newOutline = [];
+  polygon.outline.forEach((point) => {
+    newOutline.push(turn(point, polygon.angle));
+  });
+  var newPoly = new Polygon(newOutline, polygon.text);
+  newPoly.angle = polygon.angle;
+  return newPoly;
+}
+
+export function turn(point, angle) {
+    console.log(point);
+    return new Vertex(350 + Math.cos(-1 * angle) * point.x - Math.sin(-1 * angle) * point.y, 350 + Math.sin(-1 * angle) * point.x + Math.cos(-1 * angle) * point.y)
+    console.log(new Vertex(350 + Math.cos(-1 * angle) * point.x - Math.sin(-1 * angle) * point.y, 350 + Math.sin(-1 * angle) * point.x + Math.cos(-1 * angle) * point.y));
+}
+export function turnBack(point, angle) {
+    return new Vertex(Math.cos(angle) * (point.x - 350) - Math.sin(angle) * (point.y - 350), Math.sin(angle) * (point.x - 350) + Math.cos(angle) * (point.y - 350))
+}
 export function eliminateDuplicates(outline) {
   var checklist = new Set([]);
   var newOutline = [];

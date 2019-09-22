@@ -6,6 +6,7 @@ class Polygon {
   constructor(outline, text) {
     this.outline = outline;
     this.text = text.toUpperCase();
+    this.angle = 0;//Math.PI/2;
   }
   addVertex(vertex) {
     this.outline.push(vertex);

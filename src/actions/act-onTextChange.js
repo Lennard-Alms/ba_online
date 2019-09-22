@@ -1,10 +1,10 @@
-import {drawText} from '../util/centerXStrat';
+import calcualteTextOptions from '../util/centerXStrat';
 
 export default function(event, polygon, index) {
   return (dispatch) => {
     polygon.text = event.target.value;
     try{
-      var textOptions = drawText(polygon);
+      var textOptions = calcualteTextOptions(polygon);
       dispatch(changeSingleTextOption(textOptions, index));
     } catch (error) {
       console.log(error);
