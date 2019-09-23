@@ -23,7 +23,7 @@ h2 {
 #canvasPolygonDiv{
   height: 300px;
   position:relative;
-  overflow: hidden;
+  //overflow: hidden;
   span{
     -webkit-transition: top 3s, left 3s;
     transition: top 3s, left 3s;
@@ -32,7 +32,7 @@ h2 {
 #backgroundPic{
   max-width: 300px;
   max-height: 300px;
-  opacity: 0.3;
+  opacity: 0.5;
 }
 .textChangeInput{
   border: none;

@@ -1,13 +1,15 @@
 import LineSegment from './lineSegment';
 import Vertex from './vertex';
 import Graph from './graph';
-import {splitPolygon, findFurthestPoints, turnPolygon, turnBack} from './geometry'
+import {splitPolygon, findFurthestPoints, turnPolygon, turnBack, turn} from './geometry'
 import NormalDistribution from 'normal-distribution';
 
 
 
 export default function calculalteTextOptions(polygon) {
-  return drawText(polygon);
+  var options = drawText(turnPolygon(polygon));
+  console.log(options);
+  return options;
 }
 
 
@@ -29,8 +31,8 @@ const drawText = (polygon) => {
 
     if(Math.abs(v.x - u.x) <= e) continue;
 
-    var leftLine = new LineSegment(new Vertex(v.x + e, -1), new Vertex(v.x + e , 301)); // change to 300
-    var rightLine = new LineSegment(new Vertex(u.x - e, -1), new Vertex(u.x - e , 301)); // change to 300
+    var leftLine = new LineSegment(new Vertex(v.x + e, -1000), new Vertex(v.x + e , 10000)); // change to 300
+    var rightLine = new LineSegment(new Vertex(u.x - e, -1000), new Vertex(u.x - e , 10000)); // change to 300
 
     var cutListL = [];
     var cutListR = [];
@@ -116,9 +118,10 @@ const drawText = (polygon) => {
 
   if(!longestPath) {
     var textOptions = [];
+    console.log('no longest Path');
     for(var i = 0; i < polygon.text.length; i++){
       textOptions.push({
-        display: 'inline',
+        display: 'none',
         x: 0,
         y: 300,
         size: 15,
@@ -259,8 +262,8 @@ const drawText = (polygon) => {
 
       if(Math.abs(u.y - v.y) < e * 10.0) continue;
 
-      var upLine = new LineSegment(new Vertex(-1, v.y + e), new Vertex(301, v.y + e));
-      var downLine = new LineSegment(new Vertex(-1, u.y - e), new Vertex(301, u.y - e));
+      var upLine = new LineSegment(new Vertex(-1000, v.y + e), new Vertex(10000, v.y + e));
+      var downLine = new LineSegment(new Vertex(-1000, u.y - e), new Vertex(10000, u.y - e));
 
       var cutListU = [];
       var cutListD = [];
@@ -325,25 +328,22 @@ const drawText = (polygon) => {
 
       var z = zentren[index];
       var h = zHeights[index];
-      /* FIREFOX
-      var size = 1;
-      var scaleY = h * 2.8;
-      var scaleX = 1.8 * deltaX * tau;
-      var lx = z.x - (size * 0.3);
-      var ly = z.y + h * 0.2; */
+      var positionVertext = turnBack(z, polygon.angle, 350);
+      console.log(z,positionVertext);
       var size = h * 2.8;
       var scaleY = 1;
       var scaleX =(1.8 * deltaX * tau) / size;
-      var lx = z.x - (size * 0.3);
-      var ly = z.y - (size / 1.5);
-      var positionVertext = new Vertex(lx,ly);
+      var scaleXVector = turnBack(new Vertex(scaleX, 0), polygon.angle, 0);
+      var scaleYVector = turnBack(new Vertex(0, scaleY), polygon.angle, 0);
+      var lx = positionVertext.x - (size * 0.3);
+      var ly = positionVertext.y - (size / 1.5);
       var letterOptions = {
         display: 'inline',
-        x: positionVertext.x,
-        y: positionVertext.y,
+        x: lx,
+        y: ly,
         size: size,
-        scaleX: scaleX,
-        scaleY: scaleY,
+        scaleX: Math.abs(scaleXVector.mag()),
+        scaleY: Math.abs(scaleYVector.mag()),
       }
       textOptions.push(letterOptions);
     });

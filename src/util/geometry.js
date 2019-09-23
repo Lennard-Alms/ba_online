@@ -13,21 +13,23 @@ export function getAreaSizeOfPolygon(polygon) {
 export function turnPolygon(polygon) {
   var newOutline = [];
   polygon.outline.forEach((point) => {
-    newOutline.push(turn(point, polygon.angle));
+    newOutline.push(turn(point, polygon.angle, 350));
   });
   var newPoly = new Polygon(newOutline, polygon.text);
   newPoly.angle = polygon.angle;
   return newPoly;
 }
 
-export function turn(point, angle) {
-    console.log(point);
-    return new Vertex(350 + Math.cos(-1 * angle) * point.x - Math.sin(-1 * angle) * point.y, 350 + Math.sin(-1 * angle) * point.x + Math.cos(-1 * angle) * point.y)
-    console.log(new Vertex(350 + Math.cos(-1 * angle) * point.x - Math.sin(-1 * angle) * point.y, 350 + Math.sin(-1 * angle) * point.x + Math.cos(-1 * angle) * point.y));
+export function turn(point, angle, offset) {
+    return new Vertex(offset + Math.cos(angle) * point.x - Math.sin(angle) * point.y, offset + Math.sin(angle) * point.x + Math.cos(angle) * point.y)
 }
-export function turnBack(point, angle) {
-    return new Vertex(Math.cos(angle) * (point.x - 350) - Math.sin(angle) * (point.y - 350), Math.sin(angle) * (point.x - 350) + Math.cos(angle) * (point.y - 350))
+
+export function turnBack(point, angle, offset) {
+    return new Vertex(Math.cos(-1 * angle) * (point.x - offset) - Math.sin(-1 * angle) * (point.y - offset), Math.sin(-1 * angle) * (point.x - offset) + Math.cos(-1 * angle) * (point.y - offset));
 }
+
+
+
 export function eliminateDuplicates(outline) {
   var checklist = new Set([]);
   var newOutline = [];

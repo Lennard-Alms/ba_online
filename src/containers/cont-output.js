@@ -45,6 +45,7 @@ class Output extends Component {
               display: this.props.textOptionList[indexOuter][indexInner].display,
               fontSize: size.toString() + 'px',
               transform: 'scaleX(' + scaleX.toString() + ') scaleY(' + scaleY.toString() + ') rotate(' + polygon.angle + 'rad)',
+              opacity: '0.5',
             }}
             >{letter}</span>
         );
@@ -53,8 +54,8 @@ class Output extends Component {
   }
   drawOnCanvas() {
     var canvas = this.polygonCanvas.current;
-    canvas.height=300;
-    canvas.width=300;
+    canvas.height=900;
+    canvas.width=900;
     var ctx = canvas.getContext("2d");
     this.props.polygonList.forEach((polygon) => {
       polygon.getLineSegments().forEach((line) => {
