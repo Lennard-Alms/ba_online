@@ -44,7 +44,7 @@ class Output extends Component {
               top: topStr,
               display: this.props.textOptionList[indexOuter][indexInner].display,
               fontSize: size.toString() + 'px',
-              transform: 'scaleX(' + scaleX.toString() + ') scaleY(' + scaleY.toString() + ') rotate(' + polygon.angle + 'rad)',
+              transform: 'rotate(' + polygon.angle + 'rad) scaleX(' + scaleX.toString() + ') scaleY(' + scaleY.toString() + ')',
               opacity: '0.5',
             }}
             >{letter}</span>
@@ -54,8 +54,8 @@ class Output extends Component {
   }
   drawOnCanvas() {
     var canvas = this.polygonCanvas.current;
-    canvas.height=900;
-    canvas.width=900;
+    canvas.height=300;
+    canvas.width=300;
     var ctx = canvas.getContext("2d");
     this.props.polygonList.forEach((polygon) => {
       polygon.getLineSegments().forEach((line) => {
@@ -80,7 +80,8 @@ class Output extends Component {
     return(
       <div>
         <button onClick={(event) => this.props.onCalculateTextOptions(this.props.polygonList)}>Rechne!</button>
-        <div id='canvasPolygonDiv'>
+      <div id='canvasPolygonDiv'>
+          <canvas id='canvasDrawing' style={{display:'none'}} ref={this.polygonCanvas} />
           <img id='backgroundPic' src={this.props.imageLink}/>
           {this.createNameList()}
         </div>
@@ -91,6 +92,7 @@ class Output extends Component {
     );
   }
   componentDidMount(){
+    //this.drawOnCanvas()
     this.props.onCalculateTextOptions(this.props.polygonList);
   }
 }

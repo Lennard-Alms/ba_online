@@ -1,12 +1,12 @@
-import {getAreaSizeOfPolygon} from './geometry';
+import {getAreaSizeOfPolygon, calcPolyOrientation} from './geometry';
 import LineSegment from './lineSegment';
 import Vertex from './vertex';
 
 class Polygon {
   constructor(outline, text) {
     this.outline = outline;
-    this.text = text.toUpperCase();
-    this.angle = - Math.PI/2;
+    this.text = text.toUpperCase;
+    this.angle = 0;
   }
   addVertex(vertex) {
     this.outline.push(vertex);

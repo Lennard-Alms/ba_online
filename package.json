@@ -31,8 +31,8 @@
   "license": "MIT",
   "dependencies": {
     "@hot-loader/react-dom": "16.8.6",
-    "@tensorflow/tfjs": "1.2.9",
     "connected-react-router": "6.4.0",
+    "hull.js": "1.0.0",
     "hyphenopoly": "3.2.1",
     "normal-distribution": "0.0.7",
     "object-assign": "4.1.1",
