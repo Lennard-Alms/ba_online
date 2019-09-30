@@ -21,11 +21,11 @@ export function turnPolygon(polygon) {
 }
 
 export function turn(point, angle, offset) {
-    return new Vertex(offset + Math.cos(angle) * point.x - Math.sin(angle) * point.y, offset + Math.sin(angle) * point.x + Math.cos(angle) * point.y)
+    return new Vertex(offset + Math.cos(-1 * angle) * point.x - Math.sin(-1 * angle) * point.y, offset + Math.sin(-1 * angle) * point.x + Math.cos(-1 * angle) * point.y);
 }
 
 export function turnBack(point, angle, offset) {
-    return new Vertex(Math.cos(-1 * angle) * (point.x - offset) - Math.sin(-1 * angle) * (point.y - offset), Math.sin(-1 * angle) * (point.x - offset) + Math.cos(-1 * angle) * (point.y - offset));
+    return new Vertex(Math.cos(angle) * (point.x - offset) - Math.sin(angle) * (point.y - offset), Math.sin(angle) * (point.x - offset) + Math.cos(angle) * (point.y - offset));
 }
 
 

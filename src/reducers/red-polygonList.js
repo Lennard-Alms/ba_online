@@ -17,13 +17,24 @@ export default function (polygonList = null, action) {
 
 }
 function buildPolygonList(data) {
+  const laender = [' ','Schleswig-Holstein', 'Mecklenburg-Vorpommern', 'Niedersachsen', 'Brandenburg', 'Sachsen-Anhalt', 'Nordrhein-Westfalen', 'Hessen', 'Thueringen', 'Sachsen', 'Rheinland-Pfalz', 'Bayern', 'Baden-Wuerttemberg'];
   var polygonList = [];
   data.forEach((poly, index) => {
     var outline = [];
     poly.outline.forEach((vertex) => {
       outline.push(new Vertex(parseInt(vertex.x), parseInt(vertex.y)))
     });
-    polygonList.push(new Polygon(outline, 'EIN BEISPIEL TEXT'));
+    var newPoly = new Polygon(outline, 'ein beispiel text');
+    if(poly.orientation) {
+      try{
+        newPoly.text = laender[index].toUpperCase();
+      } catch {}
+      let angle = Math.atan2(poly.orientation[1], poly.orientation[0]);
+      //sif(angle < 0) angle += 2 * Math.PI;
+      newPoly.angle = angle;
+      if(index == 2) console.log(poly.orientation[0], poly.orientation[1]);
+    }
+    polygonList.push(newPoly);
   });
   return polygonList;
 }

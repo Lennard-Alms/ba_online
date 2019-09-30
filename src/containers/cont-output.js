@@ -44,7 +44,7 @@ class Output extends Component {
               top: topStr,
               display: this.props.textOptionList[indexOuter][indexInner].display,
               fontSize: size.toString() + 'px',
-              transform: 'scaleX(' + scaleX.toString() + ') scaleY(' + scaleY.toString() + ') rotate(' + polygon.angle + 'rad)',
+              transform: 'rotate(' + polygon.angle + 'rad) scaleX(' + scaleX.toString() + ') scaleY(' + scaleY.toString() + ')',
               opacity: '0.5',
             }}
             >{letter}</span>

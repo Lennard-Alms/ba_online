@@ -2,21 +2,26 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import onImageUpload from '../actions/act-imageUpload';
-import DragAndDropArea from './cont-dragAndDrop';
 
 class ImageUpload extends Component {
+  inputImage = React.createRef();
+  uploadImage(file) {
+    const node = this.inputImage.current;
+    var reader = new FileReader();
+    reader.onload = function () {
+      node.src = reader.result;
+    }
+    reader.readAsDataURL(file);
+
+    this.props.onImageUpload(file);
+  }
   render() {
     return(
       <div className="inputWrapper">
         <div style={{position: 'relative'}}>
-          <input onChange={(event) => this.props.onImageUpload(event.target.files[0], this.refs.inputImage)}  type="file" /><br />
-          <DragAndDropArea handleDrop={(files) => this.props.onImageUpload(files[0], this.refs.inputImage)}>
-            <div id="droparea">
-              Drag and Drop here.
-            </div>
-          </DragAndDropArea>
+          <input onChange={(event) => this.uploadImage(event.target.files[0])}  type="file" /><br />
         </div>
-        <img ref="inputImage" id="inputImage" style={{maxHeight: '300px', maxWidth: '300px'}} src=""/>
+        <img ref={this.inputImage} id="inputImage" style={{maxHeight: '300px', maxWidth: '300px'}} src=""/>
       </div>
     );
   }

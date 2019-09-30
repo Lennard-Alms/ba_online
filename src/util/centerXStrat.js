@@ -7,9 +7,7 @@ import NormalDistribution from 'normal-distribution';
 
 
 export default function calculalteTextOptions(polygon) {
-  var options = drawText(turnPolygon(polygon));
-  console.log(options);
-  return options;
+  return drawText(turnPolygon(polygon));
 }
 
 
@@ -300,6 +298,8 @@ const drawText = (polygon) => {
     if(foundCut) {
       upperP.text = textParts[0];
       lowerP.text = textParts[1];
+      upperP.angle = polygon.angle;
+      lowerP.angle = polygon.angle;
       var upperTextOptions = drawText(upperP);
       var lowerTextOptions = drawText(lowerP);
       if(upperP.text.length + lowerP.text.length == polygon.text.length){
@@ -329,12 +329,9 @@ const drawText = (polygon) => {
       var z = zentren[index];
       var h = zHeights[index];
       var positionVertext = turnBack(z, polygon.angle, 350);
-      console.log(z,positionVertext);
       var size = h * 2.8;
       var scaleY = 1;
-      var scaleX =(1.8 * deltaX * tau) / size;
-      var scaleXVector = turnBack(new Vertex(scaleX, 0), polygon.angle, 0);
-      var scaleYVector = turnBack(new Vertex(0, scaleY), polygon.angle, 0);
+      var scaleX =(1.7 * deltaX * tau) / size;
       var lx = positionVertext.x - (size * 0.3);
       var ly = positionVertext.y - (size / 1.5);
       var letterOptions = {
@@ -342,8 +339,8 @@ const drawText = (polygon) => {
         x: lx,
         y: ly,
         size: size,
-        scaleX: Math.abs(scaleXVector.mag()),
-        scaleY: Math.abs(scaleYVector.mag()),
+        scaleX: scaleX,
+        scaleY: scaleY,
       }
       textOptions.push(letterOptions);
     });
